@@ -61,7 +61,8 @@ defmodule LiveSvelte.MixProject do
       {:phoenix_html, ">= 3.3.1"},
       {:phoenix_live_view, ">= 0.18.0"},
       {:esbuild, "~> 0.5", only: :dev},
-      {:ex_doc, "~> 0.19", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
+      {:memoize, "~> 1.4"}
     ]
   end
 

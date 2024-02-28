@@ -1,5 +1,6 @@
 defmodule LiveSvelte do
   use Phoenix.Component
+  use Memoize
   import Phoenix.HTML
   import LiveSvelte.LiveJson
 
@@ -79,7 +80,7 @@ defmodule LiveSvelte do
               Map.get(assigns, :live_json_props, %{})
             )
 
-          SSR.render(assigns.name, props, slots)
+          ssr_render(assigns.name, props, slots)
         rescue
           SSR.NotConfigured -> nil
         end
@@ -111,6 +112,8 @@ defmodule LiveSvelte do
     </.live_json>
     """
   end
+
+  defmemo(ssr_render(name, props, slots), do: SSR.render(name, props, slots))
 
   def render(assigns) do
     IO.warn(
